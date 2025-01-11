@@ -45,6 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
 
+        // submit form to https://sending.baqladempire.com
+        fetch('https://sending.baqladempire.com/sendmail.php', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+
         setTimeout(() => {
             alert('Thank you for your application! We will be in touch soon.');
             form.reset();
