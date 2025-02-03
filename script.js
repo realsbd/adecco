@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.textContent = 'Submitting...';
 
         // submit form to https://sending.baqladempire.com
-        fetch('https://sending.baqladempire.com/sendmail.php', {
+        fetch('https://sending.techydesktop.com/sendmail.php', {
             method: 'POST',
             body: new FormData(form)
         })
