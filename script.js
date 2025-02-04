@@ -41,30 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function simulateFormSubmission() {
-        const submitButton = form.querySelector('.submit-button');
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+    const submitButton = form.querySelector('.submit-button');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
 
-        // submit form to https://sending.baqladempire.com
-        fetch('https://sending.techydesktop.com/sendmail.php', {
-            method: 'POST',
-            body: new FormData(form)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-
-        setTimeout(() => {
-            alert('Thank you for your application! We will be in touch soon.');
-            form.reset();
-            submitButton.disabled = false;
-            submitButton.textContent = 'Submit Application';
-        }, 2000);
-    }
+    fetch('https://sending.techydesktop.com/sendmail.php', {
+        method: 'POST',
+        body: new FormData(form)
+    })
+    .then(response => response.text())  // Change this from response.json() to response.text()
+    .then(data => {
+        console.log('Success:', data);
+        alert('Thank you for your application! We will be in touch soon.');
+        form.reset();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('There was an error submitting your application. Please try again.');
+    })
+    .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Application';
+    });
+}
 });
 
